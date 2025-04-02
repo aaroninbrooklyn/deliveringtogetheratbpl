@@ -1,37 +1,41 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8" />
-  <title>BPL Map</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.css" rel="stylesheet" />
-  <style>
-    body { margin: 0; padding: 0; }
-    #map { position: absolute; top: 0; bottom: 0; width: 100%; }
-  </style>
-</head>
-<body>
-  <div id="map"></div>
+  <head>
+    <meta charset="utf-8" />
+    <title>BPL Map (Test)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- ✅ LOAD MAPBOX LIBRARY FIRST -->
-  <script src="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.js"></script>
+    <!-- ✅ Mapbox CSS -->
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.css" rel="stylesheet" />
 
-  <!-- ✅ THEN YOUR MAP SCRIPT -->
-  <script>
-    mapboxgl.accessToken = 'pk.eyJ1IjoiYWFyb25pbmJyb29rbHluIiwiYSI6ImNtOGowMmZ0dzBjMDgycnB4eWdhZW9nZ2sifQ.Z70awiKsIraT8Mfh-T_iAg';
+    <style>
+      body { margin: 0; padding: 0; }
+      #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+    </style>
+  </head>
 
-    const map = new mapboxgl.Map({
-      container: 'map',
-      style: 'mapbox://styles/aaroninbrooklyn/cm8ynjmie006x01s43bs01wo2',
-      center: [-73.9442, 40.6782],
-      zoom: 12
-    });
+  <body>
+    <div id="map"></div>
 
-    map.on('load', () => {
-      console.log('✅ Map loaded!');
-      const layers = map.getStyle().layers;
-      layers.forEach(layer => console.log(layer.id));
-    });
-  </script>
-</body>
+    <!-- ✅ Mapbox JS (must be BEFORE your script) -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.js"></script>
+
+    <!-- ✅ Your map setup -->
+    <script>
+      mapboxgl.accessToken = 'pk.eyJ1IjoiYWFyb25pbmJyb29rbHluIiwiYSI6ImNtOGowMmZ0dzBjMDgycnB4eWdhZW9nZ2sifQ.Z70awiKsIraT8Mfh-T_iAg';
+
+      const map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/aaroninbrooklyn/cm8ynjmie006x01s43bs01wo2',
+        center: [-73.9442, 40.6782], // Brooklyn
+        zoom: 12
+      });
+
+      map.on('load', () => {
+        console.log('✅ Map loaded!');
+        const layers = map.getStyle().layers;
+        layers.forEach(layer => console.log('🧱 Layer:', layer.id));
+      });
+    </script>
+  </body>
 </html>
