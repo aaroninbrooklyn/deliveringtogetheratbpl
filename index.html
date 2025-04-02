@@ -19,8 +19,15 @@
     const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/aaroninbrooklyn/cm8ynjmie006x01s43bs01wo2',
-      center: [-73.9442, 40.6782],
-      zoom: 11
+      center: [-73.9442, 40.6782], // Central Brooklyn
+      zoom: 12
+    });
+
+    map.on('load', () => {
+      console.log('✅ Map loaded!');
+      console.log('🎯 Current layers:');
+      const layers = map.getStyle().layers;
+      layers.forEach(layer => console.log(layer.id));
     });
   </script>
 </body>
