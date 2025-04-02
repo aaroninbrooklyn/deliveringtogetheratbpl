@@ -5,7 +5,6 @@
   <title>BPL Map</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.css" rel="stylesheet" />
-  <script src="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.js"></script>
   <style>
     body { margin: 0; padding: 0; }
     #map { position: absolute; top: 0; bottom: 0; width: 100%; }
@@ -13,19 +12,23 @@
 </head>
 <body>
   <div id="map"></div>
+
+  <!-- ✅ LOAD MAPBOX LIBRARY FIRST -->
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.js"></script>
+
+  <!-- ✅ THEN YOUR MAP SCRIPT -->
   <script>
     mapboxgl.accessToken = 'pk.eyJ1IjoiYWFyb25pbmJyb29rbHluIiwiYSI6ImNtOGowMmZ0dzBjMDgycnB4eWdhZW9nZ2sifQ.Z70awiKsIraT8Mfh-T_iAg';
 
     const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/aaroninbrooklyn/cm8ynjmie006x01s43bs01wo2',
-      center: [-73.9442, 40.6782], // Central Brooklyn
+      center: [-73.9442, 40.6782],
       zoom: 12
     });
 
     map.on('load', () => {
       console.log('✅ Map loaded!');
-      console.log('🎯 Current layers:');
       const layers = map.getStyle().layers;
       layers.forEach(layer => console.log(layer.id));
     });
