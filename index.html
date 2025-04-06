@@ -1,29 +1,23 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" />
-    <title>BPL Map (Test)</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <!-- ✅ Mapbox CSS -->
-    <link href="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.css" rel="stylesheet" />
-
+    <meta charset="utf-8">
+    <title>Mapbox Navigation Map</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
     <style>
       body { margin: 0; padding: 0; }
       #map { position: absolute; top: 0; bottom: 0; width: 100%; }
     </style>
   </head>
-
   <body>
     <div id="map"></div>
-
-    <!-- ✅ Mapbox JS (must be BEFORE your script) -->
-    <script src="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.js"></script>
-
-    <!-- ✅ Your map setup -->
     <script>
+        // Set your Mapbox access token
       mapboxgl.accessToken = 'pk.eyJ1IjoiYWFyb25pbmJyb29rbHluIiwiYSI6ImNtOGowMmZ0dzBjMDgycnB4eWdhZW9nZ2sifQ.Z70awiKsIraT8Mfh-T_iAg';
 
+        // Initialize the map
       const map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/aaroninbrooklyn/cm8ynjmie006x01s43bs01wo2',
