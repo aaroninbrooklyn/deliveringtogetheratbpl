@@ -9,7 +9,6 @@
   <style>
     body { margin: 0; padding: 0; font-family: sans-serif; }
     #map { width: 100vw; height: 100vh; }
-    .mapboxgl-popup-content { font: 14px/1.4 sans-serif; }
   </style>
 </head>
 <body>
@@ -37,51 +36,54 @@
   map.on('load', () => {
     geolocate.trigger();
 
-    // BPL Branches (star)
+    // BPL Branches - blue circles
     map.addSource('bpl-branches', {
       type: 'vector',
       url: 'mapbox://aaroninbrooklyn.bm6hhryg'
     });
     map.addLayer({
       id: 'bpl-branches-layer',
-      type: 'symbol',
+      type: 'circle',
       source: 'bpl-branches',
       'source-layer': 'BPL_Branches_-_BPL_Branches_1-5vbipd',
-      layout: {
-        'icon-image': 'star',
-        'icon-size': 2
+      paint: {
+        'circle-radius': 6,
+        'circle-color': '#3B82F6',
+        'circle-opacity': 0.9
       }
     });
 
-    // Bike Parking (parking)
+    // Bike Parking - green circles
     map.addSource('bike-parking', {
       type: 'vector',
       url: 'mapbox://aaroninbrooklyn.58knykm8'
     });
     map.addLayer({
       id: 'bike-parking-layer',
-      type: 'symbol',
+      type: 'circle',
       source: 'bike-parking',
       'source-layer': 'Bicycle_Parking_20250401-cn1akk',
-      layout: {
-        'icon-image': 'parking',
-        'icon-size': 0.4
+      paint: {
+        'circle-radius': 4,
+        'circle-color': '#22C55E',
+        'circle-opacity': 0.9
       }
     });
 
-    // Public Restrooms (triangle)
+    // Public Restrooms - pink circles
     map.addSource('public-restrooms', {
       type: 'vector',
       url: 'mapbox://aaroninbrooklyn.69rlk77z'
     });
     map.addLayer({
       id: 'public-restrooms-layer',
-      type: 'symbol',
+      type: 'circle',
       source: 'public-restrooms',
       'source-layer': 'Public_Restrooms_20250405-5turqf',
-      layout: {
-        'icon-image': 'triangle',
-        'icon-size': 0.2
+      paint: {
+        'circle-radius': 4,
+        'circle-color': '#EC4899',
+        'circle-opacity': 0.9
       }
     });
   });
