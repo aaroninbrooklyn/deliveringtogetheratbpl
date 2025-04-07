@@ -20,13 +20,12 @@
       const map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/aaroninbrooklyn/cm8ynjmie006x01s43bs01wo2',
-        center: [-73.951257, 40.622065], // Brooklyn, zoomed into your chosen spot
+        center: [-73.951257, 40.622065],
         zoom: 10.28
       });
 
       map.addControl(new mapboxgl.NavigationControl());
 
-      // Add Geolocate control to the map.
       const geolocate = new mapboxgl.GeolocateControl({
         positionOptions: {
           enableHighAccuracy: true
@@ -38,49 +37,50 @@
 
       map.addControl(geolocate);
 
-      // Zoom to user location when geolocation is first triggered
       map.on('load', () => {
         geolocate.trigger();
 
-        // Add layers for public restrooms, bike racks, and libraries
+        // Public Restrooms
         map.addLayer({
           id: 'public-restrooms',
           type: 'symbol',
           source: {
             type: 'vector',
-            url: 'mapbox://aaroninbrooklyn.69rlk77z'
+            url: 'mapbox://aaroninbrooklyn.5turqf0z'
           },
-          'source-layer': 'public-restrooms', // Replace with the actual source layer name in your tileset
+          'source-layer': 'Public_Restrooms_20250405-5turqf',
           layout: {
-            'icon-image': 'toilet-15', // Replace with your desired icon
+            'icon-image': 'toilet-15',
             'icon-size': 1.5
           }
         });
 
+        // Bicycle Parking
         map.addLayer({
           id: 'bike-parking',
           type: 'symbol',
           source: {
             type: 'vector',
-            url: 'mapbox://aaroninbrooklyn.58knykm8'
+            url: 'mapbox://aaroninbrooklyn.cn1akkd1'
           },
-          'source-layer': 'bike-parking', // Replace with the actual source layer name in your tileset
+          'source-layer': 'Bicycle_Parking_20250401-cn1akk',
           layout: {
-            'icon-image': 'bicycle-15', // Replace with your desired icon
+            'icon-image': 'bicycle-15',
             'icon-size': 1.5
           }
         });
 
+        // BPL Branches
         map.addLayer({
           id: 'bpl-branches',
           type: 'symbol',
           source: {
             type: 'vector',
-            url: 'mapbox://aaroninbrooklyn.bm6hhryg'
+            url: 'mapbox://aaroninbrooklyn.5vbipdlq'
           },
-          'source-layer': 'bpl-branches', // Replace with the actual source layer name in your tileset
+          'source-layer': 'BPL_Branches_-_BPL_Branches_1-5vbipd',
           layout: {
-            'icon-image': 'library-15', // Replace with your desired icon
+            'icon-image': 'library-15',
             'icon-size': 1.5
           }
         });
@@ -88,4 +88,3 @@
     </script>
   </body>
 </html>
-
