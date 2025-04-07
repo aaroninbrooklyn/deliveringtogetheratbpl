@@ -41,6 +41,49 @@
       // Zoom to user location when geolocation is first triggered
       map.on('load', () => {
         geolocate.trigger();
+
+        // Add layers for public restrooms, bike racks, and libraries
+        map.addLayer({
+          id: 'public-restrooms',
+          type: 'symbol',
+          source: {
+            type: 'vector',
+            url: 'mapbox://aaroninbrooklyn.69rlk77z'
+          },
+          'source-layer': 'public-restrooms', // Replace with the actual source layer name in your tileset
+          layout: {
+            'icon-image': 'toilet-15', // Replace with your desired icon
+            'icon-size': 1.5
+          }
+        });
+
+        map.addLayer({
+          id: 'bike-parking',
+          type: 'symbol',
+          source: {
+            type: 'vector',
+            url: 'mapbox://aaroninbrooklyn.58knykm8'
+          },
+          'source-layer': 'bike-parking', // Replace with the actual source layer name in your tileset
+          layout: {
+            'icon-image': 'bicycle-15', // Replace with your desired icon
+            'icon-size': 1.5
+          }
+        });
+
+        map.addLayer({
+          id: 'bpl-branches',
+          type: 'symbol',
+          source: {
+            type: 'vector',
+            url: 'mapbox://aaroninbrooklyn.bm6hhryg'
+          },
+          'source-layer': 'bpl-branches', // Replace with the actual source layer name in your tileset
+          layout: {
+            'icon-image': 'library-15', // Replace with your desired icon
+            'icon-size': 1.5
+          }
+        });
       });
     </script>
   </body>
