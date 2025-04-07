@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <title>Mapbox Navigation Map</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
-    <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
+    <meta charset="utf-8" />
+    <title>Delivering Together Map</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.css" rel="stylesheet" />
     <style>
       body { margin: 0; padding: 0; }
       #map { position: absolute; top: 0; bottom: 0; width: 100%; }
@@ -13,23 +12,37 @@
   </head>
   <body>
     <div id="map"></div>
+
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.js"></script>
     <script>
-        // Set your Mapbox access token
       mapboxgl.accessToken = 'pk.eyJ1IjoiYWFyb25pbmJyb29rbHluIiwiYSI6ImNtOGowMmZ0dzBjMDgycnB4eWdhZW9nZ2sifQ.Z70awiKsIraT8Mfh-T_iAg';
 
-        // Initialize the map
       const map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/aaroninbrooklyn/cm8ynjmie006x01s43bs01wo2',
-        center: [-73.9442, 40.6782], // Brooklyn
-        zoom: 12
+        center: [-73.951257, 40.622065], // Brooklyn, zoomed into your chosen spot
+        zoom: 10.28
       });
 
+      map.addControl(new mapboxgl.NavigationControl());
+
+      // Add Geolocate control to the map.
+      const geolocate = new mapboxgl.GeolocateControl({
+        positionOptions: {
+          enableHighAccuracy: true
+        },
+        trackUserLocation: true,
+        showUserHeading: true,
+        fitBoundsOptions: { maxZoom: 14 }
+      });
+
+      map.addControl(geolocate);
+
+      // Zoom to user location when geolocation is first triggered
       map.on('load', () => {
-        console.log('✅ Map loaded!');
-        const layers = map.getStyle().layers;
-        layers.forEach(layer => console.log('🧱 Layer:', layer.id));
+        geolocate.trigger();
       });
     </script>
   </body>
 </html>
+
