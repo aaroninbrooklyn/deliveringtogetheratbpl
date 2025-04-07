@@ -41,29 +41,31 @@
         geolocate.trigger();
 
         // Public Restrooms
+        map.addSource('public-restrooms', {
+          type: 'vector',
+          url: 'mapbox://aaroninbrooklyn.69rlk77z'
+        });
         map.addLayer({
-          id: 'public-restrooms',
+          id: 'public-restrooms-layer',
           type: 'symbol',
-          source: {
-            type: 'vector',
-            url: 'mapbox://aaroninbrooklyn.5turqf0z'
-          },
-          'source-layer': 'Public_Restrooms_20250405-5turqf',
+          source: 'public-restrooms',
+          'source-layer': 'public-restrooms',
           layout: {
             'icon-image': 'toilet-15',
             'icon-size': 1.5
           }
         });
 
-        // Bicycle Parking
+        // Bike Parking
+        map.addSource('bike-parking', {
+          type: 'vector',
+          url: 'mapbox://aaroninbrooklyn.58knykm8'
+        });
         map.addLayer({
-          id: 'bike-parking',
+          id: 'bike-parking-layer',
           type: 'symbol',
-          source: {
-            type: 'vector',
-            url: 'mapbox://aaroninbrooklyn.cn1akkd1'
-          },
-          'source-layer': 'Bicycle_Parking_20250401-cn1akk',
+          source: 'bike-parking',
+          'source-layer': 'bike-parking',
           layout: {
             'icon-image': 'bicycle-15',
             'icon-size': 1.5
@@ -71,14 +73,15 @@
         });
 
         // BPL Branches
+        map.addSource('bpl-branches', {
+          type: 'vector',
+          url: 'mapbox://aaroninbrooklyn.bm6hhryg'
+        });
         map.addLayer({
-          id: 'bpl-branches',
+          id: 'bpl-branches-layer',
           type: 'symbol',
-          source: {
-            type: 'vector',
-            url: 'mapbox://aaroninbrooklyn.5vbipdlq'
-          },
-          'source-layer': 'BPL_Branches_-_BPL_Branches_1-5vbipd',
+          source: 'bpl-branches',
+          'source-layer': 'bpl-branches',
           layout: {
             'icon-image': 'library-15',
             'icon-size': 1.5
