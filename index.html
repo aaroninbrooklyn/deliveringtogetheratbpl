@@ -2,13 +2,23 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Delivering Together Map</title>
+  <title>Delivering Together at BPL</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
   <style>
-    body { margin: 0; padding: 0; font-family: sans-serif; }
-    #map { width: 100vw; height: 100vh; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: sans-serif;
+    }
+    #map {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+    }
   </style>
 </head>
 <body>
@@ -33,12 +43,12 @@
     showUserHeading: true,
     fitBoundsOptions: { maxZoom: 14 }
   });
-
   map.addControl(geolocate);
 
   map.on('load', () => {
     geolocate.trigger();
 
+    // Public Restrooms
     map.addSource('public-restrooms', {
       type: 'vector',
       url: 'mapbox://aaroninbrooklyn.69rlk77z'
@@ -50,10 +60,11 @@
       'source-layer': 'Public_Restrooms_20250405-5turqf',
       layout: {
         'icon-image': 'triangle',
-        'icon-size': 1.5
+        'icon-size': 1.2
       }
     });
 
+    // Bike Parking
     map.addSource('bike-parking', {
       type: 'vector',
       url: 'mapbox://aaroninbrooklyn.58knykm8'
@@ -65,10 +76,11 @@
       'source-layer': 'Bicycle_Parking_20250401-cn1akk',
       layout: {
         'icon-image': 'parking',
-        'icon-size': 1.5
+        'icon-size': 1.2
       }
     });
 
+    // BPL Branches
     map.addSource('bpl-branches', {
       type: 'vector',
       url: 'mapbox://aaroninbrooklyn.bm6hhryg'
