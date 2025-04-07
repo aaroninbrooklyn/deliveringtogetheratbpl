@@ -14,17 +14,21 @@
 <body>
 <div id="map"></div>
 <script>
+  // Your Mapbox access token
   mapboxgl.accessToken = 'pk.eyJ1IjoiYWFyb25pbmJyb29rbHluIiwiYSI6ImNtOGowMmZ0dzBjMDgycnB4eWdhZW9nZ2sifQ.Z70awiKsIraT8Mfh-T_iAg';
 
+  // Initialize the map
   const map = new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/aaroninbrooklyn/cm8ynjmie006x01s43bs01wo2',
-    center: [-73.951257, 40.622065],
-    zoom: 10.5
+    container: 'map', // container ID
+    style: 'mapbox://styles/aaroninbrooklyn/cm8ynjmie006x01s43bs01wo2', // your style URL
+    center: [-73.951257, 40.622065], // starting position [lng, lat]
+    zoom: 10.5 // starting zoom
   });
 
+  // Add navigation controls (zoom buttons, compass)
   map.addControl(new mapboxgl.NavigationControl());
 
+  // Add geolocate control (find user's location)
   const geolocate = new mapboxgl.GeolocateControl({
     positionOptions: { enableHighAccuracy: true },
     trackUserLocation: true,
@@ -33,60 +37,22 @@
   });
   map.addControl(geolocate);
 
+  // When the map loads, trigger the geolocate control
   map.on('load', () => {
+    // Automatically trigger geolocation on load
     geolocate.trigger();
 
-    // BPL Branches - blue circles
-    map.addSource('bpl-branches', {
-      type: 'vector',
-      url: 'mapbox://aaroninbrooklyn.bm6hhryg'
-    });
-    map.addLayer({
-      id: 'bpl-branches-layer',
-      type: 'circle',
-      source: 'bpl-branches',
-      'source-layer': 'BPL_Branches_-_BPL_Branches_1-5vbipd',
-      paint: {
-        'circle-radius': 6,
-        'circle-color': '#3B82F6',
-        'circle-opacity': 0.9
-      }
-    });
-
-    // Bike Parking - green circles
-    map.addSource('bike-parking', {
-      type: 'vector',
-      url: 'mapbox://aaroninbrooklyn.58knykm8'
-    });
-    map.addLayer({
-      id: 'bike-parking-layer',
-      type: 'circle',
-      source: 'bike-parking',
-      'source-layer': 'Bicycle_Parking_20250401-cn1akk',
-      paint: {
-        'circle-radius': 4,
-        'circle-color': '#22C55E',
-        'circle-opacity': 0.9
-      }
-    });
-
-    // Public Restrooms - pink circles
-    map.addSource('public-restrooms', {
-      type: 'vector',
-      url: 'mapbox://aaroninbrooklyn.69rlk77z'
-    });
-    map.addLayer({
-      id: 'public-restrooms-layer',
-      type: 'circle',
-      source: 'public-restrooms',
-      'source-layer': 'Public_Restrooms_20250405-5turqf',
-      paint: {
-        'circle-radius': 4,
-        'circle-color': '#EC4899',
-        'circle-opacity': 0.9
-      }
-    });
+    // --- Removed addSource and addLayer blocks here ---
+    // The layers (BPL Branches, Bike Parking, Public Restrooms)
+    // are assumed to be part of the Mapbox style itself.
   });
+
+  // Optional: Add error handling for map load errors
+  map.on('error', (e) => {
+    console.error('Map error:', e.error);
+    // Optionally display a message to the user
+  });
+
 </script>
 </body>
 </html>
