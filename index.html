@@ -7,52 +7,71 @@
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
   <style>
+    /* Basic styling for body and map container */
     body { margin: 0; padding: 0; font-family: sans-serif; }
-    #map { width: 100vw; height: 100vh; }
+    #map { width: 100vw; height: 100vh; } /* Make map fill the viewport */
   </style>
 </head>
 <body>
 <div id="map"></div>
+
 <script>
-  // Your Mapbox access token
+  // --- Configuration ---
+  // Your Mapbox access token (replace with your actual token if different, but this one looks correct)
   mapboxgl.accessToken = 'pk.eyJ1IjoiYWFyb25pbmJyb29rbHluIiwiYSI6ImNtOGowMmZ0dzBjMDgycnB4eWdhZW9nZ2sifQ.Z70awiKsIraT8Mfh-T_iAg';
 
-  // Initialize the map
+  // --- Map Initialization ---
   const map = new mapboxgl.Map({
-    container: 'map', // container ID
-    style: 'mapbox://styles/aaroninbrooklyn/cm8ynjmie006x01s43bs01wo2', // your style URL
-    center: [-73.951257, 40.622065], // starting position [lng, lat]
-    zoom: 10.5 // starting zoom
+    container: 'map', // The ID of the div element above
+    style: 'mapbox://styles/aaroninbrooklyn/cm8ynjmie006x01s43bs01wo2', // Your custom Mapbox style URL
+    center: [-73.951257, 40.622065], // Initial map center [longitude, latitude] (Brooklyn area)
+    zoom: 10.5 // Initial map zoom level
   });
 
-  // Add navigation controls (zoom buttons, compass)
+  // --- Map Controls ---
+  // Add zoom and rotation controls to the map.
   map.addControl(new mapboxgl.NavigationControl());
 
-  // Add geolocate control (find user's location)
+  // Add geolocate control to find the user's location.
   const geolocate = new mapboxgl.GeolocateControl({
-    positionOptions: { enableHighAccuracy: true },
-    trackUserLocation: true,
-    showUserHeading: true,
-    fitBoundsOptions: { maxZoom: 14 }
+    positionOptions: { enableHighAccuracy: true }, // Use high accuracy for location
+    trackUserLocation: true, // Continuously track the user's location
+    showUserHeading: true, // Show the direction the user is facing
+    fitBoundsOptions: { maxZoom: 14 } // Limit zoom level when fitting bounds to user location
   });
   map.addControl(geolocate);
 
-  // When the map loads, trigger the geolocate control
+  // --- Map Events ---
+  // Wait for the map style to finish loading before interacting with it
   map.on('load', () => {
-    // Automatically trigger geolocation on load
+    console.log('Map style loaded successfully.');
+    // Automatically trigger the geolocate control to find the user's location once the map loads
     geolocate.trigger();
 
-    // --- Removed addSource and addLayer blocks here ---
-    // The layers (BPL Branches, Bike Parking, Public Restrooms)
-    // are assumed to be part of the Mapbox style itself.
+    // --- Layers are Loaded via the Style ---
+    // We are assuming the BPL Branches, Bike Parking, and Public Restrooms layers
+    // are already defined in the Mapbox style ('mapbox://styles/aaroninbrooklyn/cm8ynjmie006x01s43bs01wo2').
+    // Therefore, we do NOT need map.addSource() or map.addLayer() calls here for those specific layers.
   });
 
-  // Optional: Add error handling for map load errors
+  // Optional: Listen for map errors and log them to the console
   map.on('error', (e) => {
-    console.error('Map error:', e.error);
-    // Optionally display a message to the user
+    // e.error contains information about the error
+    console.error('A Mapbox GL error occurred:', e.error);
+    // You could add user-facing error messages here if needed
   });
 
 </script>
 </body>
 </html>
+```
+
+**To use this:**
+
+1.  Copy the entire code block above.
+2.  Paste it into your `index.html` file, completely replacing the previous content.
+3.  Save the file, commit the changes to your GitHub repository, and push them.
+4.  Wait a moment for GitHub Pages to update.
+5.  Open your map's URL (`https://aaroninbrooklyn.github.io/deliveringtogetheratbpl/`) in your browser and do a hard refresh (Ctrl+Shift+R or Cmd+Shift+R).
+
+This should hopefully resolve the errors, and your map should load showing the layers defined in your Mapbox style. Check the console again if it still doesn't work as expect
