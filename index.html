@@ -7,18 +7,9 @@
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      font-family: sans-serif;
-    }
-    #map {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 100%;
-    }
+    body { margin: 0; padding: 0; font-family: sans-serif; }
+    #map { width: 100vw; height: 100vh; }
+    .mapboxgl-popup-content { font: 14px/1.4 sans-serif; }
   </style>
 </head>
 <body>
@@ -30,15 +21,13 @@
     container: 'map',
     style: 'mapbox://styles/aaroninbrooklyn/cm8ynjmie006x01s43bs01wo2',
     center: [-73.951257, 40.622065],
-    zoom: 10.28
+    zoom: 10.5
   });
 
   map.addControl(new mapboxgl.NavigationControl());
 
   const geolocate = new mapboxgl.GeolocateControl({
-    positionOptions: {
-      enableHighAccuracy: true
-    },
+    positionOptions: { enableHighAccuracy: true },
     trackUserLocation: true,
     showUserHeading: true,
     fitBoundsOptions: { maxZoom: 14 }
@@ -48,39 +37,7 @@
   map.on('load', () => {
     geolocate.trigger();
 
-    // Public Restrooms
-    map.addSource('public-restrooms', {
-      type: 'vector',
-      url: 'mapbox://aaroninbrooklyn.69rlk77z'
-    });
-    map.addLayer({
-      id: 'public-restrooms-layer',
-      type: 'symbol',
-      source: 'public-restrooms',
-      'source-layer': 'Public_Restrooms_20250405-5turqf',
-      layout: {
-        'icon-image': 'triangle',
-        'icon-size': 1.2
-      }
-    });
-
-    // Bike Parking
-    map.addSource('bike-parking', {
-      type: 'vector',
-      url: 'mapbox://aaroninbrooklyn.58knykm8'
-    });
-    map.addLayer({
-      id: 'bike-parking-layer',
-      type: 'symbol',
-      source: 'bike-parking',
-      'source-layer': 'Bicycle_Parking_20250401-cn1akk',
-      layout: {
-        'icon-image': 'parking',
-        'icon-size': 1.2
-      }
-    });
-
-    // BPL Branches
+    // BPL Branches (star)
     map.addSource('bpl-branches', {
       type: 'vector',
       url: 'mapbox://aaroninbrooklyn.bm6hhryg'
@@ -92,7 +49,39 @@
       'source-layer': 'BPL_Branches_-_BPL_Branches_1-5vbipd',
       layout: {
         'icon-image': 'star',
-        'icon-size': 1.5
+        'icon-size': 2
+      }
+    });
+
+    // Bike Parking (parking)
+    map.addSource('bike-parking', {
+      type: 'vector',
+      url: 'mapbox://aaroninbrooklyn.58knykm8'
+    });
+    map.addLayer({
+      id: 'bike-parking-layer',
+      type: 'symbol',
+      source: 'bike-parking',
+      'source-layer': 'Bicycle_Parking_20250401-cn1akk',
+      layout: {
+        'icon-image': 'parking',
+        'icon-size': 0.4
+      }
+    });
+
+    // Public Restrooms (triangle)
+    map.addSource('public-restrooms', {
+      type: 'vector',
+      url: 'mapbox://aaroninbrooklyn.69rlk77z'
+    });
+    map.addLayer({
+      id: 'public-restrooms-layer',
+      type: 'symbol',
+      source: 'public-restrooms',
+      'source-layer': 'Public_Restrooms_20250405-5turqf',
+      layout: {
+        'icon-image': 'triangle',
+        'icon-size': 0.2
       }
     });
   });
